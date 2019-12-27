@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Example</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+   
+    <style>
+        .box {
+            border: 1px solid red; 
+            width: 500px; 
+            height: 100px; 
+            position: relative;
+        }
+
+        .box div {
+            background-color: green;
+            width: 7px; 
+            height: 7px;
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            cursor: nw-resize;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div id="move"></div>
+    </div>
+
+    <script>
+        const box = document.getElementById('box');
+        const move = document.getElementById('move');
+
+        move.addEventListener('mousedown', function(e) {
+            window.addEventListener('mousemove', resize);
+            window.addEventListener('mouseup', stop);
+        });
+        
+        function resize(e) {
+            box.style.width = e.pageX - box.getBoundingClientRect().left + 'px';
+            box.style.height = e.pageY - box.getBoundingClientRect().top + 'px';
+        }
+        
+        function stop() {
+            window.removeEventListener('mousemove', resize);
+        }
+    </script>
+</body>
+</html>
